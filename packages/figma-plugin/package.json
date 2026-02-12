@@ -1,0 +1,23 @@
+{
+  "name": "@maxischmaxi/react-to-figma-plugin",
+  "version": "0.0.1",
+  "description": "Figma plugin for React to Figma — receives design specs from the CLI and builds Figma designs with shadcn components",
+  "license": "MIT",
+  "files": [
+    "manifest.json",
+    "dist/main.js",
+    "dist/ui.html"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.100.0",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

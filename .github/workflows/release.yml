@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set version from tag
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "Publishing version $VERSION"
+          npm --no-git-tag-version -w packages/react-to-figma version "$VERSION"
+          npm --no-git-tag-version -w packages/figma-plugin version "$VERSION"
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify CLI runs
+        run: node packages/react-to-figma/dist/index.js --help
+
+      - name: Publish CLI
+        working-directory: packages/react-to-figma
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Figma plugin
+        working-directory: packages/figma-plugin
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

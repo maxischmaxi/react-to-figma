@@ -1,0 +1,38 @@
+{
+  "name": "@maxischmaxi/react-to-figma",
+  "version": "0.0.1",
+  "description": "Convert a running React/shadcn app into a Figma design with real shadcn component instances",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "react-to-figma": "dist/index.js"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.js.map"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "playwright": "^1.47.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
+    "@babel/parser": "^7.25.0",
+    "@babel/traverse": "^7.25.0",
+    "@react-to-figma/shared": "*",
+    "@types/babel__traverse": "^7.20.0",
+    "@types/ws": "^8.5.0",
+    "commander": "^12.1.0",
+    "esbuild": "^0.23.0",
+    "glob": "^11.0.0",
+    "typescript": "^5.5.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
